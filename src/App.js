@@ -1,5 +1,16 @@
+import { Fragment } from "react";
+import Header from "./components/Header";
+import Formulario from "./components/Formulario";
 const App = () => {
-  return <h1>Bienvenido a Clima React</h1>;
+  return (
+    <Fragment>
+      <Header titulo="Clima React App" />
+      <section>
+        <Formulario />
+      </section>
+      <section>columna2</section>
+    </Fragment>
+  );
 };
 
 export default App;
