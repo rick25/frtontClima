@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Clima = ({ datosAPI }) => {
   const { name, weather, main } = datosAPI;
   if (!weather) return null;
@@ -19,6 +21,10 @@ const Clima = ({ datosAPI }) => {
       </p>
     </div>
   );
+};
+
+Clima.propTypes = {
+  datosAPI: PropTypes.object.isRequired,
 };
 
 export default Clima;
