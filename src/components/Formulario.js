@@ -1,10 +1,7 @@
 import { useState } from "react";
 
-const Formulario = () => {
-  const [busqueda, guardarBusqueda] = useState({
-    ciudad: "",
-    pais: "",
-  });
+const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
+  const [error, guardarError] = useState(false);
 
   const handleChange = (event) => {
     guardarBusqueda({
@@ -12,10 +9,22 @@ const Formulario = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (ciudad.trim() === "" || pais.trim() === "") {
+      guardarError(true);
+      return;
+    }
+    guardarError(false);
+    guardarConsultar(true);
+  };
+
   const { ciudad, pais } = busqueda;
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
+      {error && <p>Ambos campos son obligatorios</p>}
       <label htmlFor="ciudad">Ciudad : </label>
       <input
         type="text"
@@ -34,7 +43,8 @@ const Formulario = () => {
         <option value="CO">Colombia</option>
         <option value="MX">Mexico</option>
       </select>
-      <button type="submit">Enviar</button>
+      <br />
+      <input type="submit" value="Buscar Clima" />
     </form>
   );
 };
